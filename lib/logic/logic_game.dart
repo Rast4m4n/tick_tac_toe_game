@@ -38,7 +38,7 @@ class LogicGame extends ChangeNotifier {
     if (displayXO[0] == displayXO[1] &&
         displayXO[0] == displayXO[2] &&
         displayXO[0] != '') {
-      resultDeclaration = 'Player ${displayXO[0]} wins!';
+      resultDeclaration = 'Игрок ${displayXO[0]} выиграл';
       matchedIndexes.addAll([0, 1, 2]);
       _stopTimer();
       _updateScore(displayXO[0]);
@@ -47,7 +47,7 @@ class LogicGame extends ChangeNotifier {
     if (displayXO[3] == displayXO[4] &&
         displayXO[3] == displayXO[5] &&
         displayXO[3] != '') {
-      resultDeclaration = 'Player ${displayXO[3]} wins!';
+      resultDeclaration = 'Игрок ${displayXO[3]} выиграл';
       matchedIndexes.addAll([3, 4, 5]);
       _stopTimer();
       _updateScore(displayXO[3]);
@@ -56,7 +56,7 @@ class LogicGame extends ChangeNotifier {
     if (displayXO[6] == displayXO[7] &&
         displayXO[6] == displayXO[8] &&
         displayXO[6] != '') {
-      resultDeclaration = 'Player ${displayXO[6]} wins!';
+      resultDeclaration = 'Игрок ${displayXO[6]} выиграл';
       matchedIndexes.addAll([6, 7, 8]);
       _stopTimer();
       _updateScore(displayXO[6]);
@@ -65,7 +65,7 @@ class LogicGame extends ChangeNotifier {
     if (displayXO[0] == displayXO[3] &&
         displayXO[0] == displayXO[6] &&
         displayXO[0] != '') {
-      resultDeclaration = 'Player ${displayXO[0]} wins!';
+      resultDeclaration = 'Игрок ${displayXO[0]} выиграл';
       matchedIndexes.addAll([0, 3, 6]);
       _stopTimer();
       _updateScore(displayXO[0]);
@@ -74,7 +74,7 @@ class LogicGame extends ChangeNotifier {
     if (displayXO[1] == displayXO[4] &&
         displayXO[1] == displayXO[7] &&
         displayXO[1] != '') {
-      resultDeclaration = 'Player ${displayXO[1]} wins!';
+      resultDeclaration = 'Игрок ${displayXO[1]} выиграл';
       matchedIndexes.addAll([1, 4, 7]);
       _stopTimer();
       _updateScore(displayXO[1]);
@@ -83,7 +83,7 @@ class LogicGame extends ChangeNotifier {
     if (displayXO[2] == displayXO[5] &&
         displayXO[2] == displayXO[8] &&
         displayXO[2] != '') {
-      resultDeclaration = 'Player ${displayXO[2]} wins!';
+      resultDeclaration = 'Игрок ${displayXO[2]} выиграл';
       matchedIndexes.addAll([2, 5, 8]);
       _stopTimer();
       _updateScore(displayXO[2]);
@@ -92,7 +92,7 @@ class LogicGame extends ChangeNotifier {
     if (displayXO[0] == displayXO[4] &&
         displayXO[0] == displayXO[8] &&
         displayXO[0] != '') {
-      resultDeclaration = 'Player ${displayXO[0]} wins!';
+      resultDeclaration = 'Игрок ${displayXO[0]} выиграл';
       matchedIndexes.addAll([0, 4, 8]);
       _stopTimer();
       _updateScore(displayXO[0]);
@@ -101,13 +101,13 @@ class LogicGame extends ChangeNotifier {
     if (displayXO[6] == displayXO[4] &&
         displayXO[6] == displayXO[2] &&
         displayXO[6] != '') {
-      resultDeclaration = 'Player ${displayXO[6]} wins!';
+      resultDeclaration = 'Игрок ${displayXO[6]} выиграл';
       matchedIndexes.addAll([6, 4, 2]);
       _stopTimer();
       _updateScore(displayXO[6]);
     }
     if (!winnerFound && filledBoxes == 9) {
-      resultDeclaration = 'Nobody wins!';
+      resultDeclaration = 'Ничья';
       _stopTimer();
       notifyListeners();
     }
