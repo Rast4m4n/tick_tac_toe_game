@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:tick_tac_toe_game/ui/themes/app_colors.dart';
 import 'package:tick_tac_toe_game/logic/logic_game.dart';
@@ -12,7 +11,7 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -20,7 +19,9 @@ class GameScreen extends StatelessWidget {
             create: (_) => LogicGame(),
             child: Column(
               children: const [
+                SizedBox(height: AppPaddings.low),
                 _ScoreWidget(),
+                SizedBox(height: AppPaddings.low),
                 PlayingFieldWidget(),
                 _StartGameWidget(),
               ],
@@ -37,15 +38,15 @@ class _ScoreWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'Player o',
+                'Игрок о',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
@@ -54,12 +55,13 @@ class _ScoreWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(width: AppPaddings.hight),
-          Column(
+        ),
+        Expanded(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'Player x',
+                'Игрок х',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
@@ -68,8 +70,8 @@ class _ScoreWidget extends StatelessWidget {
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -95,14 +97,11 @@ class PlayingFieldWidget extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  width: 5,
-                  color: AppColors.primaryColor,
-                ),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: AppColors.secondaryColor),
                 color: context.watch<LogicGame>().matchedIndexes.contains(index)
-                    ? Colors.blue
-                    : AppColors.secondaryColor,
+                    ? AppColors.secondaryColor
+                    : AppColors.primaryColor,
               ),
               child: Center(
                 child: Text(
@@ -130,8 +129,8 @@ class _StartGameWidget extends StatelessWidget {
 
     return isRunning
         ? SizedBox(
-            width: 100,
-            height: 100,
+            width: 75,
+            height: 75,
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -140,13 +139,13 @@ class _StartGameWidget extends StatelessWidget {
                       context.watch<LogicGame>().seconds / LogicGame.maxSeconds,
                   valueColor: const AlwaysStoppedAnimation(Colors.white),
                   strokeWidth: 8,
-                  backgroundColor: AppColors.accentColor,
+                  backgroundColor: AppColors.primaryColor,
                 ),
                 Center(
                   child: Text(
                     context.watch<LogicGame>().seconds.toString(),
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                          fontSize: 48,
+                          fontSize: 28,
                         ),
                   ),
                 ),
@@ -166,9 +165,7 @@ class _StartGameWidget extends StatelessWidget {
               ),
             ),
             child: Text(
-              context.watch<LogicGame>().attempts == 0
-                  ? 'Начать!'
-                  : 'Играть заново!',
+              'Начать',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: AppColors.black,
                   ),
@@ -179,7 +176,6 @@ class _StartGameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 1,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

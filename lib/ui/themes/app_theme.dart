@@ -4,6 +4,7 @@ import 'package:tick_tac_toe_game/ui/themes/app_colors.dart';
 
 class AppTheme {
   static final light = ThemeData.light(useMaterial3: true).copyWith(
+    scaffoldBackgroundColor: AppColors.bgColorDark,
     textTheme: TextTheme(
       headlineSmall: GoogleFonts.coiny(),
       headlineMedium: GoogleFonts.coiny(

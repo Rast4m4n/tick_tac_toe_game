@@ -12,7 +12,6 @@ class LogicGame extends ChangeNotifier {
   int filledBoxes = 0;
   String resultDeclaration = '';
   bool winnerFound = false;
-  int attempts = 0;
 
   static const maxSeconds = 30;
   int seconds = 30;
