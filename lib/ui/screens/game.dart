@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:tick_tac_toe_game/constants/app_colors.dart';
-import 'package:tick_tac_toe_game/screens/logic_game.dart';
+import 'package:tick_tac_toe_game/ui/themes/app_colors.dart';
+import 'package:tick_tac_toe_game/logic/logic_game.dart';
+
+import '../themes/app_paddings.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
@@ -14,8 +16,8 @@ class GameScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ChangeNotifierProvider.value(
-            value: LogicGame(),
+          child: ChangeNotifierProvider(
+            create: (_) => LogicGame(),
             child: Column(
               children: const [
                 _ScoreWidget(),
@@ -32,13 +34,6 @@ class GameScreen extends StatelessWidget {
 
 class _ScoreWidget extends StatelessWidget {
   const _ScoreWidget();
-  static var customFontWhite = GoogleFonts.coiny(
-    textStyle: const TextStyle(
-      color: Colors.white,
-      letterSpacing: 3,
-      fontSize: 28,
-    ),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -51,25 +46,25 @@ class _ScoreWidget extends StatelessWidget {
             children: [
               Text(
                 'Player o',
-                style: customFontWhite,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
                 context.watch<LogicGame>().oScore.toString(),
-                style: customFontWhite,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ],
           ),
-          const SizedBox(width: 18),
+          const SizedBox(width: AppPaddings.hight),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 'Player x',
-                style: customFontWhite,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
                 context.watch<LogicGame>().xScore.toString(),
-                style: customFontWhite,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ],
           ),
@@ -112,12 +107,9 @@ class PlayingFieldWidget extends StatelessWidget {
               child: Center(
                 child: Text(
                   context.watch<LogicGame>().displayXO[index],
-                  style: GoogleFonts.coiny(
-                    textStyle: const TextStyle(
-                      fontSize: 64,
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        fontSize: 64,
+                      ),
                 ),
               ),
             ),
@@ -130,14 +122,6 @@ class PlayingFieldWidget extends StatelessWidget {
 
 class _StartGameWidget extends StatelessWidget {
   const _StartGameWidget();
-
-  static var customFontWhite = GoogleFonts.coiny(
-    textStyle: const TextStyle(
-      color: Colors.white,
-      letterSpacing: 3,
-      fontSize: 28,
-    ),
-  );
 
   Widget _buildTimer(BuildContext context) {
     final isRunning = context.watch<LogicGame>().timer == null
@@ -161,11 +145,9 @@ class _StartGameWidget extends StatelessWidget {
                 Center(
                   child: Text(
                     context.watch<LogicGame>().seconds.toString(),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 50,
-                    ),
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          fontSize: 48,
+                        ),
                   ),
                 ),
               ],
@@ -179,18 +161,17 @@ class _StartGameWidget extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(
-                horizontal: 32,
-                vertical: 16,
+                horizontal: AppPaddings.low * 4,
+                vertical: AppPaddings.low * 2,
               ),
             ),
             child: Text(
               context.watch<LogicGame>().attempts == 0
                   ? 'Начать!'
                   : 'Играть заново!',
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: AppColors.black,
+                  ),
             ),
           );
   }
@@ -205,9 +186,9 @@ class _StartGameWidget extends StatelessWidget {
           children: [
             Text(
               context.watch<LogicGame>().resultDeclaration,
-              style: customFontWhite,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppPaddings.low),
             _buildTimer(context),
           ],
         ),
